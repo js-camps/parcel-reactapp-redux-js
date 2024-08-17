@@ -1,33 +1,25 @@
-import React, { useReducer } from "react";
+import React from "react";
+import { connect } from 'react-redux';
+import { addAction, subtractAction } from '../state/actions/calcAction';
 import "../styles.css";
-import { addAction, subtractAction } from "../state/actions/calcAction";
-import reducer from '../state/reducers/calcReducer';
 
-function initializeState(initial) {
-    return {
-        count: initial.count
-    };
-}
+const Calc = ({ count, add, subtract }) => (
+    <div className="App">
+        <textarea rows="1" value={count} id="total" name="ans" readOnly />
+        <br />
+        <button type="button" className="btn" onClick={() => add(1)}>+ 1</button>
+        <button type="button" className="btn" onClick={() => add(3)}>+ 3</button>
+        <button type="button" className="btn" onClick={() => subtract(1)}>- 1</button>
+    </div>
+);
 
-function Calc() {
-  const initialState = { count: 0 };
-  const [state, dispatch] = useReducer(reducer, initialState, initializeState);
+const mapStateToProps = (state) => ({
+    count: state.count
+});
 
-  return (
-      <div className="App">
-          <textarea rows="1" value={state.count} id="total" name="ans" readOnly />
-          <br />
-          <button type="button" className="btn" onClick={() => dispatch(addAction(1))}>
-              + 1
-          </button>
-          <button type="button" className="btn" onClick={() => dispatch(addAction(3))}>
-              + 3
-          </button>
-          <button type="button" className="btn" onClick={() => dispatch(subtractAction(1))}>
-              - 1
-          </button>
-      </div>
-  );
-}
+const mapDispatchToProps = (dispatch) => ({
+    add: (value) => dispatch(addAction(value)),
+    subtract: (value) => dispatch(subtractAction(value))
+});
 
-export default Calc;
+export default connect(mapStateToProps, mapDispatchToProps)(Calc);
