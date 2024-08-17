@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import "../styles.css";
 
+import g from '../reducers/incDecReducer';
 
 function Calc() {
-  const initialState = 0;
-  const [count, setCount] = useState(initialState);
+  const initialState = { count: 0 };
+  const [state, f] = useReducer(g, initialState);
 
-  const incClick = () => {
-    setCount(count + 1); 
+  const handleIncrement = () => {
+    f({type: 'increment'})
   };
 
   return (
     <div className="App">
-      <textarea rows="1" value={count} id="total" name="ans" readOnly />
+      <textarea rows="1" value={state.count} id="total" name="ans" readOnly />
       <br />
-      <button type="button" className="btn" onClick={incClick}>
+      <button type="button" className="btn" onClick={handleIncrement}>
         + 1
       </button>
-      <button type="button" className="btn" onClick={() => setCount(count + 3)}>
+      <button type="button" className="btn" onClick={() => f({type: 'addThree' })}>
         + 3
       </button>
-      <button type="button" className="btn" onClick={() => setCount(count - 1)}>
+      <button type="button" className="btn" onClick={() => f({type: 'decrement' })}>
         - 1
       </button>
     </div>
