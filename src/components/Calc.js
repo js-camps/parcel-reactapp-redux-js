@@ -4,18 +4,18 @@ import { addAction, subtractAction } from "../state/actions/calcAction"; // Make
 
 import "../styles.css";
 
-function Calc({ count, addAction, subtractAction }) {
+function Calc({ count, add, subtract }) {
     return (
         <div className="App">
             <textarea rows="1" value={count} id="total" name="ans" readOnly />
             <br />
-            <button type="button" className="btn" onClick={() => addAction(1)}>
+            <button type="button" className="btn" onClick={() => add(1)}>
                 + 1
             </button>
-            <button type="button" className="btn" onClick={() => addAction(3)}>
+            <button type="button" className="btn" onClick={() => add(3)}>
                 + 3
             </button>
-            <button type="button" className="btn" onClick={() => subtractAction(3)}>
+            <button type="button" className="btn" onClick={() => subtract(3)}>
                 - 3
             </button>
         </div>
@@ -26,10 +26,10 @@ const mapStateToProps = (state) => {
     return { count: state.counter.count }; // Ensure this path matches your state structure
 };
 
-const mapDispatchToProps = {
-    
-    addAction,
-    subtractAction
-};
+const mapDispatchToProps = (dispatch) => ({
+    add: (value) => dispatch(addAction(value)),
+    subtract: (value) => dispatch(subtractAction(value))
+  });
+  
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calc);
