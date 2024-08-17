@@ -47,7 +47,6 @@ function Calc({ count, addAction, subtractAction }) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state); // Correct place to log the state
     return { count: state.counter.count }; // Ensure this path matches your state structure
 };
 
@@ -56,8 +55,6 @@ const mapDispatchToProps = {
     addAction,
     subtractAction
 };
-
-console.log(mapDispatchToProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calc);
 ```
