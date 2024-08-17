@@ -2,6 +2,9 @@
   font-family: sans-serif;
   text-align: center;
   padding: 2em;
+  display: flex;
+  flex-direction: column; /* This ensures that children (textarea and buttons) stack vertically */
+  align-items: center;    /* This centers the items horizontally */
 }
 
 body {
@@ -19,10 +22,8 @@ body {
   border-color: #6c5ce7 !important;
 }
 
-button,
-textarea {
-  border-radius: 0 !important;
-  font-size: 24px !important;
+button, textarea {
+  margin: 10px; /* Adds space between buttons and the textarea */
 }
 
 input[type="number"]::-webkit-inner-spin-button,

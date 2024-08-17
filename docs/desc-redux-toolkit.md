@@ -89,7 +89,6 @@ const calculatorSlice = createSlice({
 export const { add, subtract } = calculatorSlice.actions;
 
 export default calculatorSlice.reducer;
-
 ```
 
 `package.json`
